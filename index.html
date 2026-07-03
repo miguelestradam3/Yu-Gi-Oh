@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Yu-Gi-Oh! API Client</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="assets/img/logo.png" rel="icon">
+  <link href="assets/img/logo.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/index.css" rel="stylesheet">
+
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container position-relative d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <img src="assets/img/logo.png" alt="">
+        <h1 class="sitename">Yu-Gi-Oh!</h1>
+      </a>
+
+      <a class="btn-getstarted" href="https://ygoprodeck.com/api-guide/">API</a>
+
+    </div>
+  </header>
+
+  <main class="main">
+    <!-- Features Section -->
+    <section class="section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Create your own deck</h2>
+        <p>You have saved: <span id="deckCount" class="badge bg-primary">0</span> cards</p>
+      </div><!-- End Section Title -->
+
+      <div class="container p-1">
+        <div
+            id="statsContainer"
+            class="card bg-dark text-white mt-5"
+            style="display: none;">
+
+            <div class="card-header">
+                <h4>Deck Statistics</h4>
+            </div>
+
+            <div class="card-body">
+                <div id="deckStats"></div>
+            </div>
+
+        </div>
+      </div>
+
+      <div class="container p-1">
+        <div id="deck" class="row g-3"></div>
+      </div>
+
+      <div class="container p-1">
+        <div class="row">
+          <hr>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p>Download once the deck has at least one card</p>
+            <button class="btn btn-success" onclick="downloadDeck()">
+                Download Deck
+            </button>
+          </div>
+          <div class="col-md-6">
+            <input
+                type="file"
+                id="deckFile"
+                accept=".json"
+                class="form-control">
+
+            <button
+                class="btn btn-primary mt-2"
+                onclick="uploadDeck()">
+                Upload Deck
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Search for a card</h2>
+        <p>This project is possible thanks to the Open API of <strong>Yu-Gi-Oh!</strong></p>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up">
+
+        <div class="row align-items-center mb-5">
+          <div class="col-lg-12" data-aos="fade-right">
+            <div class="intro-content">
+                <div class="container py-5">
+
+                    <h1 class="text-center mb-4">
+                        Enter the name of the card
+                    </h1>
+
+                    <div class="row justify-content-center mb-4">
+
+                        <div class="col-md-6">
+
+                            <input
+                                type="text"
+                                id="search"
+                                class="form-control form-control-lg"
+                                placeholder="Search card name...">
+
+                        </div>
+
+                    </div>
+
+                    <div id="status" class="text-center mb-3"></div>
+
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-4" id="cards"></div>
+      </div>
+
+    </section><!-- /Features Section -->
+  </main>
+
+  <footer id="footer" class="footer light-background">
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-4 col-md-4 footer-about">
+            <img src="assets/img/home.jfif" class="img-fluid"/>
+          </div>
+
+          <div class="col-lg-4 col-md-4 footer-links">
+            <h4>Other projects</h4>
+            <ul>
+              <li><a href="https://github.com/miguelestradam3/pokedex">Pokedex</a></li>
+              <li><a href="https://github.com/miguelestradam3/machine_learning_classifier">Jupyter - Machine Learning</a></li>
+              <li><a href="https://github.com/miguelestradam3/rick_and_morty">Rick and Morty</a></li>
+              <li><a href="https://github.com/miguelestradam3/python_images_editor">Python</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-4 col-md-4 footer-links">
+            <h4>Technologies used in this project</h4>
+            <ul>
+              <li><a href="#">HTML</a></li>
+              <li><a href="#">CSS</a></li>
+              <li><a href="#">Javascript</a></li>
+              <li><a href="#">Bootstrap</a></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="copyright text-center">
+      <div class="container d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-center">
+
+        <div class="social-links order-first order-lg-last mb-3 mb-lg-0">
+          <a href="https://www.linkedin.com/in/miguel-estrada-46ba46367/"><i class="bi bi-linkedin"></i></a>
+          <a href="https://github.com/miguelestradam3"><i class="bi bi-github"></i></a>
+        </div>
+
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- Main JS File -->
+  <script type="text/javascript" src="assets/js/main.js"></script>
+  <script type="text/javascript" src="assets/js/api.js"></script>
+  <script type="text/javascript" src="assets/js/deck.js"></script>
+  <script type="text/javascript" src="assets/js/ui.js"></script>
+  <script type="text/javascript" src="assets/js/stats.js"></script>
+  <script type="text/javascript" src="assets/js/app.js"></script>
+
+</body>
+
+</html>
