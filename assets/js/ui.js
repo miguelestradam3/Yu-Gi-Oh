@@ -70,12 +70,29 @@ function renderPage(){
 
                 <div class="card-body">
 
-                    <h5>${card.name}</h5>
+                    <h5>${card.id} - ${card.name}</h5>
 
                     <p>${card.desc}</p>
 
-                    <p><strong>ATK:</strong> ${card.atk ?? "-"}</p>
-                    <p><strong>DEF:</strong> ${card.def ?? "-"}</p>
+                    ${card.atk !== undefined ? `
+                    <p class="mb-0">
+                        <strong>ATK:</strong> ${card.atk}
+                        &nbsp;&nbsp;
+                        <strong>DEF:</strong> ${card.def}
+                    </p>
+                    ` : ""}
+
+                    ${card.race !== undefined ? `
+                    <p><strong>RACE:</strong> ${card.race ?? "-"}</p>
+                    ` : ""}
+
+                    ${card.attribute ? `
+                    <p class="mb-1">
+                        <span class="badge" style="background:${getAttributeColor(card.attribute)} !important">
+                            Attribute: ${card.attribute}
+                        </span>
+                    </p>
+                    ` : ""}
 
                     <button class="btn"
                         onclick="addCard(${card.id})">
@@ -132,5 +149,21 @@ function renderDeck(){
     deckCount.textContent = getDeck().length;
 
     updateDeckStatistics();
+
+}
+
+function getAttributeColor(attribute) {
+
+    const colors = {
+        "LIGHT": "#FFD700",
+        "DARK": "#6F42C1",
+        "FIRE": "#E25822",
+        "WATER": "#1E90FF",
+        "EARTH": "#8B5A2B",
+        "WIND": "#2E8B57",
+        "DIVINE": "#F4C430"
+    };
+
+    return colors[attribute] || "#040000";
 
 }
