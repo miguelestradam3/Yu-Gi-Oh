@@ -1,11 +1,65 @@
+let currentPage = 1;
+const cardsPerPage = 6;
+
 function displayCards(cards){
+
+    currentCards = cards;
+    currentPage = 1;
+
+    renderPage();
+
+}
+
+function renderPagination(){
+
+    const pagination = document.getElementById("pagination");
+
+    const totalPages = Math.ceil(currentCards.length / cardsPerPage);
+
+    pagination.innerHTML = "";
+
+    if(totalPages <= 1) return;
+
+    pagination.innerHTML = `
+        <button class="btn me-2"
+            onclick="prevPage()"
+            ${currentPage === 1 ? "disabled" : ""}>
+            Previous
+        </button>
+
+        <span class="mx-2">
+            Page ${currentPage} / ${totalPages}
+        </span>
+
+        <button class="btn ms-2"
+            onclick="nextPage()"
+            ${currentPage === totalPages ? "disabled" : ""}>
+            Next
+        </button>
+    `;
+}
+
+function nextPage(){
+    currentPage++;
+    renderPage();
+}
+
+function prevPage(){
+    currentPage--;
+    renderPage();
+}
+
+function renderPage(){
 
     const container = document.getElementById("cards");
     container.innerHTML = "";
 
-    setCurrentCards(cards);
+    const start = (currentPage - 1) * cardsPerPage;
+    const end = start + cardsPerPage;
 
-    cards.forEach(card => {
+    const pageItems = currentCards.slice(start, end);
+
+    pageItems.forEach(card => {
 
         container.innerHTML += `
         <div class="col-lg-4 col-md-6 col-sm-12">
@@ -23,9 +77,7 @@ function displayCards(cards){
                     <p><strong>ATK:</strong> ${card.atk ?? "-"}</p>
                     <p><strong>DEF:</strong> ${card.def ?? "-"}</p>
 
-                    <hr>
-
-                    <button class="btn btn-primary"
+                    <button class="btn"
                         onclick="addCard(${card.id})">
                         Add to Deck
                     </button>
@@ -38,6 +90,8 @@ function displayCards(cards){
         `;
 
     });
+
+    renderPagination();
 
 }
 

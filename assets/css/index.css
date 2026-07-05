@@ -18,6 +18,11 @@
   --nav-dropdown-hover-color: #e59d02; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
 }
 
+.btn {
+  background-color: var(--accent-color) !important;
+  color: var(--contrast-color) !important;
+}
+
 /* Smooth scroll */
 :root {
   scroll-behavior: smooth;
