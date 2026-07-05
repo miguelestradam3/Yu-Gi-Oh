@@ -13,6 +13,11 @@
   color: var(--contrast-color) !important;
 }
 
+.badge {
+  background-color: var(--accent-color) !important;
+  color: var(--contrast-color) !important;
+}
+
 /* Smooth scroll */
 :root {
   scroll-behavior: smooth;
@@ -41,7 +46,6 @@ h6 {
 # Global Header
 --------------------------------------------------------------*/
 .header {
-  --background-color: rgba(255, 255, 255, 0);
   color: var(--default-color);
   background-color: var(--background-color);
   padding: 15px 0;
@@ -62,7 +66,17 @@ h6 {
   font-size: 30px;
   margin: 0;
   font-weight: 700;
-  color: var(--heading-color);
+  color: var(--contrast-color) !important;
+  text-decoration: none !important;
+  text-underline-offset: none !important;
+}
+
+.header .logo,
+.header .logo:visited,
+.header .logo:hover,
+.header .logo:focus {
+    text-decoration: none;
+    color: var(--contrast-color);
 }
 
 .header .btn-getstarted,
@@ -92,10 +106,6 @@ h6 {
     margin: 0 15px 0 0;
     padding: 6px 20px;
   }
-
-  .header .navmenu {
-    order: 3;
-  }
 }
 
 .scrolled .header::before {
@@ -107,8 +117,6 @@ h6 {
   -webkit-backdrop-filter: blur(10px);
   z-index: -1;
   pointer-events: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  /* optional border */
 }
 
 /*--------------------------------------------------------------
