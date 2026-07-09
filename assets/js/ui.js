@@ -116,6 +116,16 @@ function renderDeck(){
 
     const deckContainer = document.getElementById("deck");
     const deckCount = document.getElementById("deckCount");
+    const deck_buttons = document.getElementById("deckContainer");
+
+    if (deckCount.length === 0) {
+
+        deck_buttons.style.display = "none";
+        return;
+
+    }
+
+    deck_buttons.style.display = "block";
 
     deckContainer.innerHTML = "";
 
