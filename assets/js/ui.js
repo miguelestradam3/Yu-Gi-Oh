@@ -1,20 +1,21 @@
 let currentPage = 1;
 const cardsPerPage = 6;
+let filteredCards = [];
 
 function displayCards(cards){
 
     currentCards = cards;
     currentPage = 1;
 
-    renderPage();
+    applyFilters();
 
 }
 
-function renderPagination(){
+function renderPagination(cards){
 
     const pagination = document.getElementById("pagination");
 
-    const totalPages = Math.ceil(currentCards.length / cardsPerPage);
+    const totalPages = Math.ceil(cards.length / cardsPerPage);
 
     pagination.innerHTML = "";
 
@@ -40,16 +41,53 @@ function renderPagination(){
 }
 
 function nextPage(){
+
     currentPage++;
+
     renderPage();
+
 }
 
 function prevPage(){
+
     currentPage--;
+    
     renderPage();
 }
 
-function renderPage(){
+function applyFilters(){
+
+    const selectedType =
+        document.getElementById("typeFilter").value;
+
+    const selectedAttribute =
+        document.getElementById("attributeFilter").value;
+
+    filteredCards = [...currentCards];
+
+    if(selectedType){
+
+        filteredCards = filteredCards.filter(card =>
+            card.type.includes(selectedType)
+        );
+
+    }
+
+    if(selectedAttribute){
+
+        filteredCards = filteredCards.filter(card =>
+            card.attribute === selectedAttribute
+        );
+
+    }
+
+    currentPage = 1;
+
+    renderPage(filteredCards);
+
+}
+
+function renderPage(cards = currentCards){
 
     const container = document.getElementById("cards");
     container.innerHTML = "";
@@ -57,7 +95,7 @@ function renderPage(){
     const start = (currentPage - 1) * cardsPerPage;
     const end = start + cardsPerPage;
 
-    const pageItems = currentCards.slice(start, end);
+    const pageItems = cards.slice(start, end);
 
     pageItems.forEach(card => {
 
@@ -108,7 +146,7 @@ function renderPage(){
 
     });
 
-    renderPagination();
+    renderPagination(cards);
 
 }
 

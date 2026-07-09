@@ -113,21 +113,61 @@
       <div class="container section-title" data-aos="fade-up">
         <h2>Search for a card</h2>
         <p>This project is possible thanks to the Open API of <strong>Yu-Gi-Oh!</strong></p>
+        <p>You first have to search by letters "Search Card"</p>
         <div class="container py-5">
 
-            <div class="row justify-content-center mb-4">
+          <div class="row mb-4">
 
-                <div class="col-md-6">
+              <!-- Search -->
+              <div class="col-lg-6 col-md-12 mb-3">
 
-                    <input
-                        type="text"
-                        id="search"
-                        class="form-control form-control-lg"
-                        placeholder="Search card name...">
+                  <label class="form-label">Search Card</label>
 
-                </div>
+                  <input
+                      type="text"
+                      id="search"
+                      class="form-control"
+                      placeholder="Search by name...">
 
-            </div>
+              </div>
+
+              <!-- Card Type -->
+              <div class="col-lg-3 col-md-6 mb-3">
+
+                  <label class="form-label">Type</label>
+
+                  <select id="typeFilter" class="form-select">
+
+                      <option value="">All</option>
+                      <option value="Monster">Monster</option>
+                      <option value="Spell">Spell</option>
+                      <option value="Trap">Trap</option>
+
+                  </select>
+
+              </div>
+
+              <!-- Attribute -->
+              <div class="col-lg-3 col-md-6 mb-3">
+
+                  <label class="form-label">Attribute</label>
+
+                  <select id="attributeFilter" class="form-select">
+
+                      <option value="">All</option>
+                      <option>DARK</option>
+                      <option>LIGHT</option>
+                      <option>EARTH</option>
+                      <option>FIRE</option>
+                      <option>WATER</option>
+                      <option>WIND</option>
+                      <option>DIVINE</option>
+
+                  </select>
+
+              </div>
+
+          </div>
 
             <div id="status" class="text-center mb-3"></div>
 

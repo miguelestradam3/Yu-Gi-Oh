@@ -2,6 +2,12 @@ const input = document.getElementById("search");
 const container = document.getElementById("cards");
 const status = document.getElementById("status");
 
+document.getElementById("typeFilter")
+    .addEventListener("change", applyFilters);
+
+document.getElementById("attributeFilter")
+    .addEventListener("change", applyFilters);
+
 let timeout;
 
 status.innerHTML = `
