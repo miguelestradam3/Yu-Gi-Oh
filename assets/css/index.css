@@ -463,6 +463,19 @@ section,
 /*--------------------------------------------------------------
 # Duplicate Card Grouping & Animation
 --------------------------------------------------------------*/
+.btn-filter-icon {
+  background-color: #212529 !important;
+  color: #adb5bd !important;
+  border: 1px solid #495057 !important;
+  transition: all 0.2s ease;
+}
+
+.btn-filter-icon:hover {
+  background-color: #343a40 !important;
+  color: var(--accent-color) !important;
+  border-color: var(--accent-color) !important;
+}
+
 .card-copy-badge {
   position: absolute;
   top: 8px;

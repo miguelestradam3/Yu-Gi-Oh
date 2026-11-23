@@ -1,13 +1,43 @@
 let currentPage = 1;
-const cardsPerPage = 6;
+const cardsPerPage = 12;
 let filteredCards = [];
 
-function displayCards(cards){
+function sortCards(cards, sortBy = "name", order = "asc") {
+    const list = [...cards];
+    list.sort((a, b) => {
+        let valA, valB;
+        if (sortBy === "name") {
+            const comp = (a.name || "").localeCompare(b.name || "");
+            return order === "desc" ? -comp : comp;
+        } else if (sortBy === "atk") {
+            valA = a.atk !== undefined && a.atk !== null ? a.atk : -1;
+            valB = b.atk !== undefined && b.atk !== null ? b.atk : -1;
+        } else if (sortBy === "def") {
+            valA = a.def !== undefined && a.def !== null ? a.def : -1;
+            valB = b.def !== undefined && b.def !== null ? b.def : -1;
+        } else if (sortBy === "level") {
+            valA = a.level !== undefined && a.level !== null ? a.level : 0;
+            valB = b.level !== undefined && b.level !== null ? b.level : 0;
+        } else if (sortBy === "id") {
+            valA = Number(a.id) || 0;
+            valB = Number(b.id) || 0;
+        } else {
+            return 0;
+        }
 
-    currentCards = cards;
+        return order === "desc" ? valB - valA : valA - valB;
+    });
+    return list;
+}
+
+function displayCards(cards, sortBy = "name", sortOrder = "asc"){
+
+    const sorted = sortCards(cards, sortBy, sortOrder);
+    currentCards = sorted;
+    filteredCards = sorted;
     currentPage = 1;
 
-    applyFilters();
+    renderPage(filteredCards);
 
 }
 
@@ -23,17 +53,17 @@ function renderPagination(cards){
 
     pagination.innerHTML = `
         <div class="d-flex align-items-center justify-content-center flex-wrap gap-2">
-            <button class="btn"
+            <button class="btn btn-sm"
                 onclick="prevPage()"
                 ${currentPage === 1 ? "disabled" : ""}>
                 <i class="bi bi-chevron-left me-1"></i> Previous
             </button>
 
             <span class="px-3 py-1 rounded bg-dark border border-secondary text-white small">
-                Page ${currentPage} / ${totalPages}
+                Page ${currentPage} / ${totalPages} (${cards.length} cards)
             </span>
 
-            <button class="btn"
+            <button class="btn btn-sm"
                 onclick="nextPage()"
                 ${currentPage === totalPages ? "disabled" : ""}>
                 Next <i class="bi bi-chevron-right ms-1"></i>
@@ -46,7 +76,7 @@ function nextPage(){
 
     currentPage++;
 
-    renderPage();
+    renderPage(filteredCards);
 
 }
 
@@ -54,33 +84,31 @@ function prevPage(){
 
     currentPage--;
     
-    renderPage();
+    renderPage(filteredCards);
 }
 
 function applyFilters(){
 
-    const selectedType =
-        document.getElementById("typeFilter").value;
+    if (typeof fetchAndDisplayCards === "function") {
+        fetchAndDisplayCards();
+        return;
+    }
 
-    const selectedAttribute =
-        document.getElementById("attributeFilter").value;
+    const selectedType = document.getElementById("typeFilter") ? document.getElementById("typeFilter").value : "";
+    const selectedAttribute = document.getElementById("attributeFilter") ? document.getElementById("attributeFilter").value : "";
 
     filteredCards = [...currentCards];
 
     if(selectedType){
-
         filteredCards = filteredCards.filter(card =>
             card.type.includes(selectedType)
         );
-
     }
 
     if(selectedAttribute){
-
         filteredCards = filteredCards.filter(card =>
             card.attribute === selectedAttribute
         );
-
     }
 
     currentPage = 1;
@@ -101,17 +129,26 @@ function renderPage(cards = currentCards){
 
     pageItems.forEach(card => {
 
+        const imageUrl = card.card_images && card.card_images[0] ? card.card_images[0].image_url : "assets/img/logo.png";
+
         container.innerHTML += `
         <div class="col-12 col-md-6 col-lg-4">
 
-            <div class="card yugioh-card shadow h-100 d-flex flex-column justify-content-between">
+            <div class="card yugioh-card shadow h-100 d-flex flex-column justify-content-between position-relative">
 
                 <div>
-                    <img src="${card.card_images[0].image_url}" class="card-img-top" alt="${card.name}">
+                    <img src="${imageUrl}" class="card-img-top" alt="${card.name}">
 
                     <div class="card-body pb-0">
 
-                        <h5 class="fs-6 fw-bold mb-2 text-truncate" title="${card.name}">${card.id} - ${card.name}</h5>
+                        <div class="d-flex align-items-center justify-content-between gap-1 mb-2">
+                            <h5 class="fs-6 fw-bold mb-0 text-truncate" title="${card.name}">${card.id} - ${card.name}</h5>
+                            ${card.level ? `
+                            <span class="badge bg-dark border border-warning text-warning small px-2 py-1 flex-shrink-0" title="Level / Rank ${card.level}">
+                                <i class="bi bi-star-fill text-warning me-1"></i>${card.level}
+                            </span>
+                            ` : ""}
+                        </div>
 
                         <p class="card-desc text-light opacity-75 mb-2">${card.desc}</p>
 
@@ -123,17 +160,25 @@ function renderPage(cards = currentCards){
                         </p>
                         ` : ""}
 
-                        ${card.race !== undefined ? `
-                        <p class="mb-1 small"><strong>RACE:</strong> ${card.race ?? "-"}</p>
-                        ` : ""}
-
-                        ${card.attribute ? `
-                        <p class="mb-2">
-                            <span class="badge" style="background:${getAttributeColor(card.attribute)} !important">
-                                Attribute: ${card.attribute}
+                        <div class="d-flex flex-wrap gap-1 mb-2">
+                            ${card.race !== undefined ? `
+                            <span class="badge bg-secondary bg-opacity-50 text-light small">
+                                ${card.race}
                             </span>
-                        </p>
-                        ` : ""}
+                            ` : ""}
+
+                            ${card.type ? `
+                            <span class="badge bg-dark border border-secondary text-secondary small">
+                                ${card.type}
+                            </span>
+                            ` : ""}
+
+                            ${card.attribute ? `
+                            <span class="badge" style="background:${getAttributeColor(card.attribute)} !important">
+                                ${card.attribute}
+                            </span>
+                            ` : ""}
+                        </div>
                     </div>
                 </div>
 

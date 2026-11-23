@@ -198,53 +198,166 @@
 
       <!-- Search Section Title -->
       <div id="search-section" class="container section-title mt-4" data-aos="fade-up">
-        <h2>Search for a card</h2>
-        <p>This project is possible thanks to the Open API of <strong>Yu-Gi-Oh!</strong></p>
-        <p class="small text-secondary">Search cards by typing at least 3 letters below</p>
+        <h2>Search & Explore Cards</h2>
+        <p>Powered by the Official YGOPRODeck Database</p>
+        <p class="small text-secondary">Browse global cards or search and filter across 14,000+ cards</p>
       </div>
 
       <!-- Search Filters -->
       <div class="container mb-4">
-        <div class="p-3 p-md-4 rounded border border-secondary bg-dark bg-opacity-25">
+        <div class="p-3 p-md-4 rounded border border-secondary bg-dark bg-opacity-25 shadow-sm">
           <div class="row g-3 text-start">
 
-              <!-- Search -->
-              <div class="col-12 col-md-6">
-                  <label for="search" class="form-label fw-semibold small text-light">Search Card</label>
+              <!-- Search Text Input -->
+              <div class="col-12 col-lg-6">
+                  <label for="search" class="form-label fw-semibold small text-light">
+                    <i class="bi bi-search me-1 text-warning"></i> Card Name
+                  </label>
                   <div class="input-group">
                       <span class="input-group-text bg-dark border-secondary text-secondary"><i class="bi bi-search"></i></span>
                       <input
                           type="text"
                           id="search"
-                          class="form-control"
-                          placeholder="Search by name...">
+                          class="form-control bg-dark text-white border-secondary"
+                          placeholder="Search card name (or leave empty for global browse)...">
+                      <button class="btn btn-filter-icon" type="button" id="clearSearch" title="Clear text">
+                          <i class="bi bi-x-lg"></i>
+                      </button>
                   </div>
               </div>
 
               <!-- Card Type -->
-              <div class="col-12 col-sm-6 col-md-3">
-                  <label for="typeFilter" class="form-label fw-semibold small text-light">Type</label>
-                  <select id="typeFilter" class="form-select">
-                      <option value="">All</option>
-                      <option value="Monster">Monster</option>
-                      <option value="Spell">Spell</option>
-                      <option value="Trap">Trap</option>
+              <div class="col-12 col-sm-6 col-lg-3">
+                  <label for="typeFilter" class="form-label fw-semibold small text-light">
+                    <i class="bi bi-card-heading me-1 text-warning"></i> Card Type
+                  </label>
+                  <select id="typeFilter" class="form-select bg-dark text-white border-secondary">
+                      <option value="">All Types</option>
+                      <option value="Monster">Monsters (All)</option>
+                      <option value="Normal Monster">Normal Monster</option>
+                      <option value="Effect Monster">Effect Monster</option>
+                      <option value="Fusion Monster">Fusion Monster</option>
+                      <option value="Ritual Monster">Ritual Monster</option>
+                      <option value="Synchro Monster">Synchro Monster</option>
+                      <option value="XYZ Monster">XYZ Monster</option>
+                      <option value="Link Monster">Link Monster</option>
+                      <option value="Spell Card">Spell Card</option>
+                      <option value="Trap Card">Trap Card</option>
                   </select>
               </div>
 
               <!-- Attribute -->
-              <div class="col-12 col-sm-6 col-md-3">
-                  <label for="attributeFilter" class="form-label fw-semibold small text-light">Attribute</label>
-                  <select id="attributeFilter" class="form-select">
-                      <option value="">All</option>
-                      <option>DARK</option>
-                      <option>LIGHT</option>
-                      <option>EARTH</option>
-                      <option>FIRE</option>
-                      <option>WATER</option>
-                      <option>WIND</option>
-                      <option>DIVINE</option>
+              <div class="col-12 col-sm-6 col-lg-3">
+                  <label for="attributeFilter" class="form-label fw-semibold small text-light">
+                    <i class="bi bi-gem me-1 text-warning"></i> Attribute
+                  </label>
+                  <select id="attributeFilter" class="form-select bg-dark text-white border-secondary">
+                      <option value="">All Attributes</option>
+                      <option value="DARK">DARK</option>
+                      <option value="LIGHT">LIGHT</option>
+                      <option value="EARTH">EARTH</option>
+                      <option value="FIRE">FIRE</option>
+                      <option value="WATER">WATER</option>
+                      <option value="WIND">WIND</option>
+                      <option value="DIVINE">DIVINE</option>
                   </select>
+              </div>
+
+              <!-- Race / Monster Subtype -->
+              <div class="col-12 col-sm-6 col-lg-3">
+                  <label for="raceFilter" class="form-label fw-semibold small text-light">
+                    <i class="bi bi-diagram-3 me-1 text-warning"></i> Race / Subtype
+                  </label>
+                  <select id="raceFilter" class="form-select bg-dark text-white border-secondary">
+                      <option value="">All Races & Subtypes</option>
+                      <optgroup label="Monster Races">
+                        <option value="Dragon">Dragon</option>
+                        <option value="Spellcaster">Spellcaster</option>
+                        <option value="Warrior">Warrior</option>
+                        <option value="Fiend">Fiend</option>
+                        <option value="Fairy">Fairy</option>
+                        <option value="Machine">Machine</option>
+                        <option value="Zombie">Zombie</option>
+                        <option value="Cyberse">Cyberse</option>
+                        <option value="Beast">Beast</option>
+                        <option value="Beast-Warrior">Beast-Warrior</option>
+                        <option value="Aqua">Aqua</option>
+                        <option value="Fish">Fish</option>
+                        <option value="Sea Serpent">Sea Serpent</option>
+                        <option value="Pyro">Pyro</option>
+                        <option value="Thunder">Thunder</option>
+                        <option value="Rock">Rock</option>
+                        <option value="Plant">Plant</option>
+                        <option value="Insect">Insect</option>
+                        <option value="Dinosaur">Dinosaur</option>
+                        <option value="Winged Beast">Winged Beast</option>
+                        <option value="Reptile">Reptile</option>
+                        <option value="Psychic">Psychic</option>
+                        <option value="Divine-Beast">Divine-Beast</option>
+                      </optgroup>
+                      <optgroup label="Spell / Trap Types">
+                        <option value="Normal">Normal</option>
+                        <option value="Continuous">Continuous</option>
+                        <option value="Quick-Play">Quick-Play</option>
+                        <option value="Field">Field</option>
+                        <option value="Equip">Equip</option>
+                        <option value="Counter">Counter</option>
+                        <option value="Ritual">Ritual</option>
+                      </optgroup>
+                  </select>
+              </div>
+
+              <!-- Level / Rank -->
+              <div class="col-12 col-sm-6 col-lg-3">
+                  <label for="levelFilter" class="form-label fw-semibold small text-light">
+                    <i class="bi bi-star me-1 text-warning"></i> Level / Rank
+                  </label>
+                  <select id="levelFilter" class="form-select bg-dark text-white border-secondary">
+                      <option value="">All Levels & Ranks</option>
+                      <option value="1">★ Level 1</option>
+                      <option value="2">★ Level 2</option>
+                      <option value="3">★ Level 3</option>
+                      <option value="4">★ Level 4</option>
+                      <option value="5">★ Level 5</option>
+                      <option value="6">★ Level 6</option>
+                      <option value="7">★ Level 7</option>
+                      <option value="8">★ Level 8</option>
+                      <option value="9">★ Level 9</option>
+                      <option value="10">★ Level 10</option>
+                      <option value="11">★ Level 11</option>
+                      <option value="12">★ Level 12</option>
+                  </select>
+              </div>
+
+              <!-- Sort Filter -->
+              <div class="col-12 col-sm-6 col-lg-3">
+                  <label for="sortFilter" class="form-label fw-semibold small text-light">
+                    <i class="bi bi-sort-down me-1 text-warning"></i> Sort By
+                  </label>
+                  <select id="sortFilter" class="form-select bg-dark text-white border-secondary">
+                      <option value="name">Name</option>
+                      <option value="atk">ATK (Attack)</option>
+                      <option value="def">DEF (Defense)</option>
+                      <option value="level">Level / Rank</option>
+                      <option value="new">Release (Newest)</option>
+                      <option value="id">Card ID</option>
+                  </select>
+              </div>
+
+              <!-- Sort Order & Reset -->
+              <div class="col-12 col-sm-6 col-lg-3">
+                  <label for="orderFilter" class="form-label fw-semibold small text-light">
+                    <i class="bi bi-arrow-down-up me-1 text-warning"></i> Order & Reset
+                  </label>
+                  <div class="d-flex gap-2">
+                      <select id="orderFilter" class="form-select bg-dark text-white border-secondary">
+                          <option value="asc">Ascending (Low-High / A-Z)</option>
+                          <option value="desc">Descending (High-Low / Z-A)</option>
+                      </select>
+                      <button id="resetFilters" class="btn btn-filter-icon flex-shrink-0" type="button" title="Reset all filters">
+                          <i class="bi bi-arrow-counterclockwise me-1"></i>Reset
+                      </button>
+                  </div>
               </div>
 
           </div>
