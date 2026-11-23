@@ -22,21 +22,23 @@ function renderPagination(cards){
     if(totalPages <= 1) return;
 
     pagination.innerHTML = `
-        <button class="btn me-2"
-            onclick="prevPage()"
-            ${currentPage === 1 ? "disabled" : ""}>
-            Previous
-        </button>
+        <div class="d-flex align-items-center justify-content-center flex-wrap gap-2">
+            <button class="btn"
+                onclick="prevPage()"
+                ${currentPage === 1 ? "disabled" : ""}>
+                <i class="bi bi-chevron-left me-1"></i> Previous
+            </button>
 
-        <span class="mx-2">
-            Page ${currentPage} / ${totalPages}
-        </span>
+            <span class="px-3 py-1 rounded bg-dark border border-secondary text-white small">
+                Page ${currentPage} / ${totalPages}
+            </span>
 
-        <button class="btn ms-2"
-            onclick="nextPage()"
-            ${currentPage === totalPages ? "disabled" : ""}>
-            Next
-        </button>
+            <button class="btn"
+                onclick="nextPage()"
+                ${currentPage === totalPages ? "disabled" : ""}>
+                Next <i class="bi bi-chevron-right ms-1"></i>
+            </button>
+        </div>
     `;
 }
 
@@ -100,43 +102,46 @@ function renderPage(cards = currentCards){
     pageItems.forEach(card => {
 
         container.innerHTML += `
-        <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="col-12 col-md-6 col-lg-4">
 
-            <div class="card yugioh-card shadow h-100">
+            <div class="card yugioh-card shadow h-100 d-flex flex-column justify-content-between">
 
-                <img src="${card.card_images[0].image_url}" class="card-img-top">
+                <div>
+                    <img src="${card.card_images[0].image_url}" class="card-img-top" alt="${card.name}">
 
-                <div class="card-body">
+                    <div class="card-body pb-0">
 
-                    <h5>${card.id} - ${card.name}</h5>
+                        <h5 class="fs-6 fw-bold mb-2 text-truncate" title="${card.name}">${card.id} - ${card.name}</h5>
 
-                    <p>${card.desc}</p>
+                        <p class="card-desc text-light opacity-75 mb-2">${card.desc}</p>
 
-                    ${card.atk !== undefined ? `
-                    <p class="mb-0">
-                        <strong>ATK:</strong> ${card.atk}
-                        &nbsp;&nbsp;
-                        <strong>DEF:</strong> ${card.def}
-                    </p>
-                    ` : ""}
+                        ${card.atk !== undefined ? `
+                        <p class="mb-1 small">
+                            <strong>ATK:</strong> ${card.atk}
+                            &nbsp;&nbsp;
+                            <strong>DEF:</strong> ${card.def}
+                        </p>
+                        ` : ""}
 
-                    ${card.race !== undefined ? `
-                    <p><strong>RACE:</strong> ${card.race ?? "-"}</p>
-                    ` : ""}
+                        ${card.race !== undefined ? `
+                        <p class="mb-1 small"><strong>RACE:</strong> ${card.race ?? "-"}</p>
+                        ` : ""}
 
-                    ${card.attribute ? `
-                    <p class="mb-1">
-                        <span class="badge" style="background:${getAttributeColor(card.attribute)} !important">
-                            Attribute: ${card.attribute}
-                        </span>
-                    </p>
-                    ` : ""}
+                        ${card.attribute ? `
+                        <p class="mb-2">
+                            <span class="badge" style="background:${getAttributeColor(card.attribute)} !important">
+                                Attribute: ${card.attribute}
+                            </span>
+                        </p>
+                        ` : ""}
+                    </div>
+                </div>
 
-                    <button class="btn"
+                <div class="p-3 pt-0">
+                    <button class="btn w-100"
                         onclick="addCard(${card.id})">
-                        Add to Deck
+                        <i class="bi bi-plus-circle me-1"></i> Add to Deck
                     </button>
-
                 </div>
 
             </div>
@@ -160,21 +165,25 @@ function renderDeck(){
     getDeck().forEach((card,index) => {
 
         deckContainer.innerHTML += `
-        <div class="col-md-3">
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2">
 
-            <div class="card yugioh-card shadow h-100">
+            <div class="card yugioh-card shadow h-100 d-flex flex-column justify-content-between">
 
-                <img src="${card.card_images[0].image_url}" class="card-img-top">
+                <div>
+                    <img src="${card.card_images[0].image_url}" class="card-img-top" alt="${card.name}">
 
-                <div class="card-body text-center">
+                    <div class="card-body text-center p-2">
 
-                    <h6>${card.name}</h6>
+                        <h6 class="text-truncate small mb-0" title="${card.name}">${card.name}</h6>
 
-                    <button class="btn btn-danger btn-sm"
+                    </div>
+                </div>
+
+                <div class="p-2 pt-0 text-center">
+                    <button class="btn btn-sm w-100" style="background-color: #dc3545 !important;"
                         onclick="removeCard(${index})">
-                        Remove
+                        <i class="bi bi-trash3 me-1"></i> Remove
                     </button>
-
                 </div>
 
             </div>

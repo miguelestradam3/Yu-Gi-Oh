@@ -23,6 +23,11 @@
   scroll-behavior: smooth;
 }
 
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 /*--------------------------------------------------------------
 # General Styling & Shared Classes
 --------------------------------------------------------------*/
@@ -63,7 +68,7 @@ h6 {
 }
 
 .header .logo h1 {
-  font-size: 30px;
+  font-size: clamp(1.1rem, 3.5vw, 1.75rem);
   margin: 0;
   font-weight: 700;
   color: var(--contrast-color) !important;
@@ -341,9 +346,23 @@ section,
 }
 
 .card img{
-    height:320px;
-    object-fit:contain;
-    padding:15px;
+    height: 300px;
+    max-height: 55vw;
+    object-fit: contain;
+    padding: 12px;
+}
+
+#deck .card img {
+    height: 180px;
+    max-height: 40vw;
+    padding: 8px;
+}
+
+.card-desc {
+    max-height: 100px;
+    overflow-y: auto;
+    font-size: 0.85rem;
+    scrollbar-width: thin;
 }
 
 .yugioh-card{
@@ -376,4 +395,67 @@ section,
 .yugioh-card h6{
     color: white;
     font-weight: bold;
+}
+
+/*--------------------------------------------------------------
+# Responsive Design Adjustments
+--------------------------------------------------------------*/
+@media (max-width: 768px) {
+  section,
+  .section {
+    padding: 40px 0;
+  }
+
+  .section-title {
+    padding-bottom: 30px;
+  }
+
+  .section-title h2 {
+    font-size: 1.75rem;
+  }
+
+  .section-title h2:before,
+  .section-title h2:after {
+    width: 25px;
+  }
+
+  .header {
+    padding: 10px 0;
+  }
+
+  .card img {
+    height: 240px;
+  }
+
+  #deck .card img {
+    height: 140px;
+    padding: 6px;
+  }
+
+  .footer .footer-top {
+    padding-top: 35px;
+  }
+}
+
+@media (max-width: 576px) {
+  .section-title h2 {
+    font-size: 1.5rem;
+  }
+
+  .header .btn-getstarted {
+    padding: 6px 16px;
+    font-size: 13px;
+  }
+
+  .header .logo img {
+    max-height: 28px;
+  }
+
+  .card img {
+    height: 210px;
+  }
+
+  #deck .card img {
+    height: 130px;
+  }
 }

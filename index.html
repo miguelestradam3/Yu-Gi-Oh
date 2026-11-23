@@ -33,25 +33,102 @@
   <!-- Main CSS File -->
   <link href="assets/css/index.css" rel="stylesheet">
 
+  <style>
+    .btn-hero-outline {
+      background: transparent !important;
+      color: #ffffff !important;
+      border: 2px solid rgba(255, 255, 255, 0.75) !important;
+      transition: all 0.3s ease;
+    }
+    .btn-hero-outline:hover {
+      background: rgba(255, 255, 255, 0.15) !important;
+      color: var(--accent-color) !important;
+      border-color: var(--accent-color) !important;
+    }
+  </style>
+
 </head>
 
 <body class="index-page">
 
   <header id="header" class="header d-flex align-items-center fixed-top">
-    <div class="container position-relative d-flex align-items-center justify-content-between">
+    <div class="container position-relative d-flex align-items-center justify-content-between gap-2">
 
-      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
-        <img src="assets/img/logo.png" alt="">
-        <h1 class="navbar-brand">Yu-Gi-Oh! Deck Builder</h1>
+      <a href="index.html" class="logo d-flex align-items-center text-truncate">
+        <img src="assets/img/logo.png" alt="Yu-Gi-Oh Logo" class="flex-shrink-0">
+        <h1 class="navbar-brand text-truncate mb-0">Yu-Gi-Oh! Deck Builder</h1>
       </a>
-      <a class="btn-getstarted" href="https://ygoprodeck.com/api-guide/">API</a>
+      <a class="btn-getstarted flex-shrink-0" href="https://ygoprodeck.com/api-guide/">API</a>
 
     </div>
   </header>
 
   <main class="main">
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section position-relative overflow-hidden py-4 py-md-5" style="padding-top: 100px !important;">
+      <div class="container py-2 py-md-4">
+        <div class="row align-items-center g-4 g-lg-5">
+          <!-- Text Content -->
+          <div class="col-lg-7 text-center text-lg-start">
+            <div class="d-inline-flex align-items-center gap-2 px-3 py-1 mb-3 rounded-pill" style="background: rgba(229, 157, 2, 0.15); border: 1px solid rgba(229, 157, 2, 0.4); color: var(--accent-color);">
+              <i class="bi bi-stars"></i>
+              <span class="small fw-semibold text-uppercase tracking-wider">Trading Card Game Deck Builder</span>
+            </div>
+
+            <h1 class="display-5 fw-bold text-white mb-3 lh-sm">
+              Build Your Ultimate Deck. <br class="d-none d-md-inline">
+              <span style="color: var(--accent-color);">Rule Every Duel.</span>
+            </h1>
+
+            <p class="lead text-light opacity-75 mb-4 pe-lg-4 fs-6 fs-md-5" style="line-height: 1.7;">
+              Search thousands of official Yu-Gi-Oh! cards powered by the YGOPRODeck API. Construct custom competitive decks with automated 3-copy rules, monitor real-time deck analytics, and easily import or export your deck recipes.
+            </p>
+
+            <div class="d-flex flex-column flex-sm-row gap-2 gap-sm-3 justify-content-center justify-content-lg-start mb-4">
+              <a href="#deck-section" class="btn btn-lg px-4 py-2 fw-bold d-inline-flex align-items-center justify-content-center shadow-sm">
+                <i class="bi bi-collection-fill me-2"></i> Create Your Deck
+              </a>
+              <a href="#search-section" class="btn btn-hero-outline btn-lg px-4 py-2 fw-semibold d-inline-flex align-items-center justify-content-center">
+                <i class="bi bi-search me-2"></i> Search Cards
+              </a>
+            </div>
+
+            <!-- Highlights -->
+            <div class="row row-cols-1 row-cols-sm-3 g-2 pt-3 border-top border-secondary border-opacity-50 text-start">
+              <div class="col d-flex align-items-center gap-2">
+                <i class="bi bi-check2-circle fs-5" style="color: var(--accent-color);"></i>
+                <span class="small text-light">3-Card Limit Rule</span>
+              </div>
+              <div class="col d-flex align-items-center gap-2">
+                <i class="bi bi-graph-up-arrow fs-5" style="color: var(--accent-color);"></i>
+                <span class="small text-light">Live Deck Statistics</span>
+              </div>
+              <div class="col d-flex align-items-center gap-2">
+                <i class="bi bi-arrow-down-up fs-5" style="color: var(--accent-color);"></i>
+                <span class="small text-light">JSON Import / Export</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Image Graphic -->
+          <div class="col-lg-5 text-center">
+            <div class="position-relative d-inline-block w-100" style="max-width: 440px;">
+              <div class="p-2 rounded-4 shadow-lg" style="background: linear-gradient(145deg, rgba(229,157,2,0.25) 0%, rgba(25,25,25,0.95) 100%); border: 1px solid rgba(229,157,2,0.35);">
+                <img src="assets/img/home.jfif" alt="Yu-Gi-Oh! Deck Builder" class="img-fluid rounded-4 shadow" style="width: 100%; height: auto; max-height: 400px; object-fit: cover;">
+              </div>
+              <div class="position-absolute bottom-0 start-50 translate-middle-x mb-2 mb-md-3 badge rounded-pill px-3 py-2 shadow" style="background-color: rgba(15, 15, 15, 0.9) !important; color: var(--accent-color) !important; border: 1px solid var(--accent-color); font-size: 0.8rem;">
+                <i class="bi bi-lightning-charge-fill me-1"></i> Powered by YGOPRODeck API
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Hero Section -->
+
     <!-- Features Section -->
-    <section class="section">
+    <section id="deck-section" class="section py-4 py-md-5">
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
@@ -59,14 +136,14 @@
         <p>You have saved: <span id="deckCount" class="badge">0</span> cards</p>
       </div><!-- End Section Title -->
 
-      <div class="container p-1">
+      <div class="container mb-4">
         <div
             id="statsContainer"
-            class="card bg-dark text-white mt-5"
+            class="card bg-dark text-white border-secondary shadow"
             style="display: none;">
 
-            <div class="card-header">
-                <h4>Deck Statistics</h4>
+            <div class="card-header border-secondary d-flex align-items-center justify-content-between">
+                <h4 class="mb-0 fs-5"><i class="bi bi-bar-chart-fill me-2 text-warning"></i>Deck Statistics</h4>
             </div>
 
             <div class="card-body">
@@ -76,84 +153,89 @@
         </div>
       </div>
 
-      <div class="container p-1">
-        <div id="deck" class="row g-3"></div>
+      <div class="container mb-4">
+        <div id="deck" class="row g-2 g-md-3"></div>
       </div>
 
-      <div class="container p-1">
-        <div class="row">
-          <hr>
-        </div>
-        <div class="row">
-          <div class="col-md-6 col-6 col-sm-6 p-1">
-            <p class="p-1 m-1">Download once the deck when it has at least one card</p>
-            <button class="btn" onclick="downloadDeck()">
-                Download Deck
-            </button>
+      <div class="container">
+        <hr class="border-secondary opacity-50 my-4">
+        <div class="row g-3 g-md-4">
+          <div class="col-12 col-md-6">
+            <div class="p-3 rounded border border-secondary bg-dark bg-opacity-50 h-100 d-flex flex-column justify-content-between">
+              <div>
+                <h5 class="fs-6 fw-bold mb-1"><i class="bi bi-download me-2 text-warning"></i>Export Deck</h5>
+                <p class="text-secondary small mb-3">Download your deck as a JSON file when it has at least one card.</p>
+              </div>
+              <button class="btn w-100" onclick="downloadDeck()">
+                <i class="bi bi-file-earmark-arrow-down me-1"></i> Download Deck
+              </button>
+            </div>
           </div>
-          <div class="col-md-6 col-6 col-sm-6 p-1">
-            <p class="p-1 m-1">Upload your deck in a <strong>JSON</strong> format</p>
-            <input
-                type="file"
-                id="deckFile"
-                accept=".json"
-                class="form-control">
-            <button
-                class="btn mt-2"
-                onclick="uploadDeck()">
-                Upload Deck
-            </button>
+          <div class="col-12 col-md-6">
+            <div class="p-3 rounded border border-secondary bg-dark bg-opacity-50 h-100 d-flex flex-column justify-content-between">
+              <div>
+                <h5 class="fs-6 fw-bold mb-1"><i class="bi bi-upload me-2 text-warning"></i>Import Deck</h5>
+                <p class="text-secondary small mb-2">Upload your saved deck file in <strong>JSON</strong> format.</p>
+              </div>
+              <div>
+                <input
+                    type="file"
+                    id="deckFile"
+                    accept=".json"
+                    class="form-control mb-2">
+                <button
+                    class="btn w-100"
+                    onclick="uploadDeck()">
+                    <i class="bi bi-file-earmark-arrow-up me-1"></i> Upload Deck
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       <br>
 
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
+      <!-- Search Section Title -->
+      <div id="search-section" class="container section-title mt-4" data-aos="fade-up">
         <h2>Search for a card</h2>
         <p>This project is possible thanks to the Open API of <strong>Yu-Gi-Oh!</strong></p>
-        <p>You first have to search by letters "Search Card"</p>
-        <div class="container py-5">
+        <p class="small text-secondary">Search cards by typing at least 3 letters below</p>
+      </div>
 
-          <div class="row mb-4">
+      <!-- Search Filters -->
+      <div class="container mb-4">
+        <div class="p-3 p-md-4 rounded border border-secondary bg-dark bg-opacity-25">
+          <div class="row g-3 text-start">
 
               <!-- Search -->
-              <div class="col-lg-6 col-md-12 mb-3">
-
-                  <label class="form-label">Search Card</label>
-
-                  <input
-                      type="text"
-                      id="search"
-                      class="form-control"
-                      placeholder="Search by name...">
-
+              <div class="col-12 col-md-6">
+                  <label for="search" class="form-label fw-semibold small text-light">Search Card</label>
+                  <div class="input-group">
+                      <span class="input-group-text bg-dark border-secondary text-secondary"><i class="bi bi-search"></i></span>
+                      <input
+                          type="text"
+                          id="search"
+                          class="form-control"
+                          placeholder="Search by name...">
+                  </div>
               </div>
 
               <!-- Card Type -->
-              <div class="col-lg-3 col-md-6 mb-3">
-
-                  <label class="form-label">Type</label>
-
+              <div class="col-12 col-sm-6 col-md-3">
+                  <label for="typeFilter" class="form-label fw-semibold small text-light">Type</label>
                   <select id="typeFilter" class="form-select">
-
                       <option value="">All</option>
                       <option value="Monster">Monster</option>
                       <option value="Spell">Spell</option>
                       <option value="Trap">Trap</option>
-
                   </select>
-
               </div>
 
               <!-- Attribute -->
-              <div class="col-lg-3 col-md-6 mb-3">
-
-                  <label class="form-label">Attribute</label>
-
+              <div class="col-12 col-sm-6 col-md-3">
+                  <label for="attributeFilter" class="form-label fw-semibold small text-light">Attribute</label>
                   <select id="attributeFilter" class="form-select">
-
                       <option value="">All</option>
                       <option>DARK</option>
                       <option>LIGHT</option>
@@ -162,39 +244,36 @@
                       <option>WATER</option>
                       <option>WIND</option>
                       <option>DIVINE</option>
-
                   </select>
-
               </div>
 
           </div>
-
-            <div id="status" class="text-center mb-3"></div>
-
         </div>
-      </div><!-- End Section Title -->
 
-        <div class="row g-4" id="cards"></div>
+        <div id="status" class="text-center mt-3"></div>
+      </div>
 
-        <br>
-
+      <!-- Cards Results Container -->
+      <div class="container">
+        <div class="row g-3 g-md-4" id="cards"></div>
         <div id="pagination" class="d-flex justify-content-center mt-4"></div>
+      </div>
 
     </section><!-- /Features Section -->
   </main>
 
   <footer id="footer" class="footer light-background">
 
-    <div class="footer-top">
+    <div class="footer-top py-4 py-md-5">
       <div class="container">
-        <div class="row gy-4">
-          <div class="col-lg-4 col-md-4 footer-about">
-            <img src="assets/img/home.jfif" class="img-fluid"/>
+        <div class="row gy-4 align-items-center">
+          <div class="col-12 col-md-4 text-center text-md-start">
+            <img src="assets/img/home.jfif" class="img-fluid rounded shadow" style="max-height: 180px; object-fit: cover;" alt="Yu-Gi-Oh!"/>
           </div>
 
-          <div class="col-lg-4 col-md-4 footer-links">
+          <div class="col-6 col-md-4 footer-links text-start">
             <h4>Other projects</h4>
-            <ul>
+            <ul class="list-unstyled">
               <li><a href="https://github.com/miguelestradam3/pokedex">Pokedex</a></li>
               <li><a href="https://github.com/miguelestradam3/machine_learning_classifier">Jupyter - Machine Learning</a></li>
               <li><a href="https://github.com/miguelestradam3/rick_and_morty">Rick and Morty</a></li>
@@ -202,9 +281,9 @@
             </ul>
           </div>
 
-          <div class="col-lg-4 col-md-4 footer-links">
-            <h4>Technologies used in this project</h4>
-            <ul>
+          <div class="col-6 col-md-4 footer-links text-start">
+            <h4>Technologies</h4>
+            <ul class="list-unstyled">
               <li><a href="#">HTML</a></li>
               <li><a href="#">CSS</a></li>
               <li><a href="#">Javascript</a></li>
@@ -216,14 +295,13 @@
       </div>
     </div>
 
-    <div class="copyright text-center">
-      <div class="container d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-center">
-
-        <div class="social-links order-first order-lg-last mb-3 mb-lg-0">
+    <div class="copyright text-center py-3">
+      <div class="container d-flex flex-column flex-sm-row justify-content-center justify-content-sm-between align-items-center gap-2">
+        <p class="mb-0 small text-secondary">&copy; Yu-Gi-Oh! Deck Builder</p>
+        <div class="social-links d-flex gap-2">
           <a href="https://www.linkedin.com/in/miguel-estrada-46ba46367/"><i class="bi bi-linkedin"></i></a>
           <a href="https://github.com/miguelestradam3"><i class="bi bi-github"></i></a>
         </div>
-
       </div>
     </div>
 

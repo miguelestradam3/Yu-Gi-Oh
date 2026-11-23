@@ -28,13 +28,44 @@ function updateDeckStatistics(){
         : 0;
 
     stats.innerHTML = `
-        <p><strong>Total:</strong> ${deck.length}</p>
-        <p><strong>Monsters:</strong> ${monsters}</p>
-        <p><strong>Spells:</strong> ${spells}</p>
-        <p><strong>Traps:</strong> ${traps}</p>
-        <hr>
-        <p><strong>Avg ATK:</strong> ${avgAtk}</p>
-        <p><strong>Avg DEF:</strong> ${avgDef}</p>
+        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-6 g-2 text-center">
+            <div class="col">
+                <div class="p-2 rounded bg-black bg-opacity-50 border border-secondary">
+                    <div class="text-secondary small">Total</div>
+                    <div class="fs-5 fw-bold text-white">${deck.length}</div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="p-2 rounded bg-black bg-opacity-50 border border-secondary">
+                    <div class="text-secondary small">Monsters</div>
+                    <div class="fs-5 fw-bold text-warning">${monsters}</div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="p-2 rounded bg-black bg-opacity-50 border border-secondary">
+                    <div class="text-secondary small">Spells</div>
+                    <div class="fs-5 fw-bold text-success">${spells}</div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="p-2 rounded bg-black bg-opacity-50 border border-secondary">
+                    <div class="text-secondary small">Traps</div>
+                    <div class="fs-5 fw-bold text-danger">${traps}</div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="p-2 rounded bg-black bg-opacity-50 border border-secondary">
+                    <div class="text-secondary small">Avg ATK</div>
+                    <div class="fs-5 fw-bold text-info">${avgAtk}</div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="p-2 rounded bg-black bg-opacity-50 border border-secondary">
+                    <div class="text-secondary small">Avg DEF</div>
+                    <div class="fs-5 fw-bold text-light">${avgDef}</div>
+                </div>
+            </div>
+        </div>
     `;
 
 }
