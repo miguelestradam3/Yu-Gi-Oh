@@ -155,19 +155,42 @@ function renderPage(cards = currentCards){
 
 }
 
-function renderDeck(){
+function renderDeck(animatedCardId = null, isDuplicate = false){
 
     const deckContainer = document.getElementById("deck");
     const deckCount = document.getElementById("deckCount");
 
     deckContainer.innerHTML = "";
 
-    getDeck().forEach((card,index) => {
+    const currentDeck = getDeck();
+
+    // Group identical cards together
+    const grouped = [];
+    const map = new Map();
+
+    currentDeck.forEach(card => {
+        if (!map.has(card.id)) {
+            const item = { card: card, count: 1 };
+            map.set(card.id, item);
+            grouped.push(item);
+        } else {
+            map.get(card.id).count++;
+        }
+    });
+
+    grouped.forEach(({ card, count }) => {
+        const shouldAnimate = isDuplicate && animatedCardId === card.id && count > 1;
 
         deckContainer.innerHTML += `
         <div class="col-6 col-sm-4 col-md-3 col-lg-2">
 
-            <div class="card yugioh-card shadow h-100 d-flex flex-column justify-content-between">
+            <div class="card yugioh-card shadow h-100 d-flex flex-column justify-content-between position-relative ${shouldAnimate ? 'duplicate-animated' : ''}" id="deck-card-${card.id}">
+
+                ${shouldAnimate ? `<div class="copy-float-flare">+1 Copy</div>` : ''}
+
+                ${count > 1 ? `
+                <span class="card-copy-badge">x${count}</span>
+                ` : ''}
 
                 <div>
                     <img src="${card.card_images[0].image_url}" class="card-img-top" alt="${card.name}">
@@ -180,10 +203,18 @@ function renderDeck(){
                 </div>
 
                 <div class="p-2 pt-0 text-center">
-                    <button class="btn btn-sm w-100" style="background-color: #dc3545 !important;"
-                        onclick="removeCard(${index})">
-                        <i class="bi bi-trash3 me-1"></i> Remove
-                    </button>
+                    <div class="d-flex align-items-center justify-content-center gap-1">
+                        <button class="btn btn-sm btn-danger flex-grow-1" style="background-color: #dc3545 !important;"
+                            onclick="removeCard(${card.id})" title="Remove one copy">
+                            <i class="bi bi-dash-circle me-1"></i> Remove
+                        </button>
+                        ${count < 3 ? `
+                        <button class="btn btn-sm btn-warning" style="background-color: var(--accent-color) !important;"
+                            onclick="addCard(${card.id})" title="Add another copy">
+                            <i class="bi bi-plus-lg"></i>
+                        </button>
+                        ` : ''}
+                    </div>
                 </div>
 
             </div>
@@ -193,7 +224,18 @@ function renderDeck(){
 
     });
 
-    deckCount.textContent = getDeck().length;
+    if (isDuplicate && animatedCardId) {
+        setTimeout(() => {
+            const el = document.getElementById(`deck-card-${animatedCardId}`);
+            if (el) {
+                el.classList.remove("duplicate-animated");
+                const flare = el.querySelector(".copy-float-flare");
+                if (flare) flare.remove();
+            }
+        }, 1200);
+    }
+
+    deckCount.textContent = currentDeck.length;
 
     updateDeckStatistics();
 

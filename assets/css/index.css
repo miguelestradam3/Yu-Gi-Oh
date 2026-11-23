@@ -459,3 +459,108 @@ section,
     height: 130px;
   }
 }
+
+/*--------------------------------------------------------------
+# Duplicate Card Grouping & Animation
+--------------------------------------------------------------*/
+.card-copy-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: linear-gradient(135deg, #e59d02 0%, #ff5722 100%) !important;
+  color: #ffffff !important;
+  font-weight: 800;
+  font-size: 0.825rem;
+  padding: 3px 9px;
+  border-radius: 50px;
+  border: 2px solid #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+  z-index: 10;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+}
+
+@keyframes duplicateCardPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(229, 157, 2, 0);
+  }
+  20% {
+    transform: scale(1.1) translateY(-8px);
+    box-shadow: 0 0 28px rgba(229, 157, 2, 0.95), 0 0 50px rgba(255, 87, 34, 0.6);
+    border-color: #e59d02 !important;
+  }
+  45% {
+    transform: scale(1.04) translateY(-3px);
+    box-shadow: 0 0 20px rgba(229, 157, 2, 0.8);
+  }
+  70% {
+    transform: scale(1.07) translateY(-5px);
+    box-shadow: 0 0 24px rgba(229, 157, 2, 0.7);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    box-shadow: 0 0 0 rgba(229, 157, 2, 0);
+  }
+}
+
+@keyframes badgePop {
+  0% {
+    transform: scale(0.2) rotate(-25deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.45) rotate(10deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes floatPlusOne {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 0) scale(0.6);
+  }
+  25% {
+    opacity: 1;
+    transform: translate(-50%, -15px) scale(1.15);
+  }
+  65% {
+    opacity: 1;
+    transform: translate(-50%, -35px) scale(1.05);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -55px) scale(0.9);
+  }
+}
+
+.duplicate-animated {
+  animation: duplicateCardPulse 0.95s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
+  z-index: 15 !important;
+}
+
+.duplicate-animated .card-copy-badge {
+  animation: badgePop 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.copy-float-flare {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background: linear-gradient(135deg, #e59d02 0%, #ff5722 100%);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 0.95rem;
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 18px rgba(229, 157, 2, 0.9);
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 25;
+  animation: floatPlusOne 1.1s ease-out forwards;
+}
